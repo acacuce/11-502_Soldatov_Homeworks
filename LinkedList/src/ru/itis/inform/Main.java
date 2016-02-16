@@ -5,11 +5,10 @@ public class Main {
     public static void main(String[] args) {
 	// write your code here
         LinkedList myLinkedList = new LinkedList();
-        for (int i = 0; i < 16; i++) {
-            myLinkedList.add(i);
-        }
+        myLinkedList.add(1);
+        myLinkedList.add(2);
         myLinkedList.show();
-        myLinkedList.remove(15);
+//        myLinkedList.remove(15);
         System.out.println();
         myLinkedList.show();
     }

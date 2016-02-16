@@ -1,16 +1,23 @@
-package ru.itis.inform;
+package ru.itis.inform.linkedList;
+
+import ru.itis.inform.RationalNum;
+import ru.itis.inform.linkedList.List;
+import ru.itis.inform.linkedList.Node;
+import ru.itis.inform.IRationalNum;
 
 public class LinkedList implements List {
     private Node first;
     private Node tail;
+
     private int count;
 
     public LinkedList() {
+
         this.first = null;
         this.count = 0;
     }
 
-    public void add(int element) {
+    public void add(IRationalNum element) {
         Node newNode = new Node(element);
 
         if (first == null) {
@@ -23,12 +30,12 @@ public class LinkedList implements List {
     }
 
     @Override
-    public void remove(int element) {
+    public void remove(IRationalNum element) {
         Node previous = null;
-        Node current = this.first;
+        Node current  = this.first;
         while (current.getValue() != element) {
             previous = current;
-            current = current.getNext();
+            current  = current.getNext();
         }
         if (previous == null){
             this.first = current.getNext();
@@ -37,13 +44,15 @@ public class LinkedList implements List {
         }
     }
 
-    public void show() {
-        Node node = first;
+    public void insertElement (Node first, Node second, IRationalNum element) {
+        Node newNode = new Node(element);
+        first.setNext(newNode);
+        newNode.setNext(second);
 
-        while(node.getNext() != null) {
-            System.out.print(node.getValue() + ", ");
-            node = node.getNext();
-        }
-        System.out.print(node.getValue());
     }
+
+    public Node getFirst() {
+        return first;
+    }
+
 }
