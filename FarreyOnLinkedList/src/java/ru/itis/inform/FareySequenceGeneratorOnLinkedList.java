@@ -23,7 +23,7 @@ public class FareySequenceGeneratorOnLinkedList {
 
     public void generateSeries () {
         Node current = listForSeries.getFirst();
-        Node next = current.getNext();
+        Node next    = current.getNext();
         while (currentSize <= sizeOfSeries) {
             while ( current.getNext() !=  null) {
                 if (checkCondition(current, next)) {
@@ -58,6 +58,7 @@ public class FareySequenceGeneratorOnLinkedList {
             return false;
         }
     }
+    
     public void showSeries () {
         Node node = listForSeries.getFirst();
 
