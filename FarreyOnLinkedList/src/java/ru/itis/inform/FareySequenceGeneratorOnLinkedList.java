@@ -1,6 +1,5 @@
 package ru.itis.inform;
 
-import ru.itis.inform.RationalNum;
 import ru.itis.inform.linkedList.LinkedList;
 import ru.itis.inform.linkedList.Node;
 
@@ -22,7 +21,7 @@ public class FareySequenceGeneratorOnLinkedList {
     }
 
     public void generateSeries () {
-        Node current = listForSeries.getFirst();
+        Node current = listForSeries.getHead();
         Node next    = current.getNext();
         while (currentSize <= sizeOfSeries) {
             while ( current.getNext() !=  null) {
@@ -34,7 +33,7 @@ public class FareySequenceGeneratorOnLinkedList {
                 next    = next.getNext();
             }
             currentSize ++;
-            current = listForSeries.getFirst();
+            current = listForSeries.getHead();
             next    = current.getNext();
         }
     }
@@ -60,7 +59,7 @@ public class FareySequenceGeneratorOnLinkedList {
     }
     
     public void showSeries () {
-        Node node = listForSeries.getFirst();
+        Node node = listForSeries.getHead();
 
         while (node.getNext() != null) {
             System.out.print(node.getValue().getNumerator() + "  ");
@@ -68,7 +67,7 @@ public class FareySequenceGeneratorOnLinkedList {
         }
 
         System.out.print(node.getValue().getNumerator() + " ");
-        node = listForSeries.getFirst();
+        node = listForSeries.getHead();
         System.out.println();
 
         while (node.getNext() != null) {
@@ -77,7 +76,7 @@ public class FareySequenceGeneratorOnLinkedList {
         }
 
         System.out.print("-, ");
-        node = listForSeries.getFirst();
+        node = listForSeries.getHead();
         System.out.println();
 
         while (node.getNext() != null) {
