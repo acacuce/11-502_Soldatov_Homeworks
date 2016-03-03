@@ -87,6 +87,58 @@ public class LinkedList<T> implements List<T> {
         }
     }
 
+    public void merge (LinkedList<T> list) {
+        if (this.head != null){
+            this.tail.setNext(list.getHead());
+            this.tail = list.getTail();
+            this.count += list.getCount();
+        }else {
+            this.head = list.getHead();
+            this.tail = list.getTail();
+            this.count = list.getCount();
+        }
+    }
+
+//    @Override
+//    public boolean equals (Object another) {
+//        System.out.print("equals?");
+//        if (another == null) return false;
+//        if (another == this) return true;
+//        if (!(another instanceof LinkedList)) return false;
+//
+//        LinkedList anotherList = (LinkedList) another;
+//
+//        if (this.count != anotherList.getCount()) return false;
+//
+//        Node thisNode = head;
+//        Node anotherNode = (Node) anotherList.getHead();
+//
+//        while(anotherNode != null) {
+//            if (!(thisNode.equals(anotherNode))) return false;
+//            thisNode = thisNode.getNext();
+//            anotherNode = anotherNode.getNext();
+//        }
+//        return true;
+//    }
+
+//    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof List))
+            return false;
+
+        Iterator<T> e1 = iterator();
+        Iterator<?> e2 = ((List<?>) o).iterator();
+        while (e1.hasNext() && e2.hasNext()) {
+            T o1 = e1.next();
+            Object o2 = e2.next();
+            if (!(o1==null ? o2==null : o1.equals(o2)))
+                return false;
+        }
+        return !(e1.hasNext() || e2.hasNext());
+    }
+
     public void show() {
         Node node = head;
 
@@ -101,13 +153,16 @@ public class LinkedList<T> implements List<T> {
         return new LinkedListIterator(head);
     }
 
-
     public Node<T> getHead() {
         return head;
     }
 
     public Node<T> getTail() {
         return tail;
+    }
+
+    public int getCount() {
+        return count;
     }
 
     public void setTail(Node<T> tail) {

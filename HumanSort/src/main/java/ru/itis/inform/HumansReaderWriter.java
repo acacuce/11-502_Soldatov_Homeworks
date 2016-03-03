@@ -32,7 +32,7 @@ public class HumansReaderWriter {
 
     }
 
-    public void writeHumans (String fileName, LinkedList<Human> list) {
+    public void writeHumans(String fileName, LinkedList<Human> list) {
         File file = new File(fileName);
         try {
             if (!file.exists()) {
@@ -52,8 +52,8 @@ public class HumansReaderWriter {
         }
     }
 
-    private Human createHumanWithParamsFromStr (String params) {
+    public Human createHumanWithParamsFromStr (String params) {
         String []atributes = params.split(" ");
-        return new Human(Integer.valueOf(atributes[1]), atributes[0]);
+        return new Human(atributes[0], Integer.parseInt(atributes[1]));
     }
 }

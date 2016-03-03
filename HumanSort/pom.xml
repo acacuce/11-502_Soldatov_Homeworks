@@ -14,7 +14,15 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>ru.itis.inform</groupId>
+            <artifactId>list</artifactId>
+            <version>0.3.2</version>
+        </dependency>
     </dependencies>
+
+
     <build>
         <plugins>
             <plugin>

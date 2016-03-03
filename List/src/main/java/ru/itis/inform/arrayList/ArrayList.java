@@ -1,4 +1,4 @@
-package ru.itis.inform;
+package ru.itis.inform.arrayList;
 
 /**
  * Created by acacuce on 28.02.16.
@@ -23,7 +23,7 @@ public class ArrayList<T> {
     }
 
     public void set(T element, int index) {
-        if (index > 0 && index < sizeOfArray){
+        if (index >= 0 && index < sizeOfArray){
             elements[index] = element;
         }else throw new IllegalArgumentException();
     }
@@ -33,6 +33,8 @@ public class ArrayList<T> {
             return (T)this.elements[index];
         } else throw new IllegalArgumentException();
     }
+
+//    public void recreate
 
     public int getSizeOfArray() {
         return sizeOfArray;

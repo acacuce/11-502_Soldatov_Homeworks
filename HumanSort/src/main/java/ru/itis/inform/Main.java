@@ -3,7 +3,6 @@ package ru.itis.inform;
 import ru.itis.inform.linkedList.LinkedList;
 
 import java.io.FileNotFoundException;
-import java.util.*;
 
 /**
  * Created by acacuce on 24.02.16.
@@ -16,10 +15,12 @@ public class Main {
         HumansReaderWriter readerWriter = new HumansReaderWriter();
         HumanSort sort = new HumanSort();
         try {
-            LinkedList<Human> list =readerWriter.readHumans(fileNameInput);
-             list = sort.sort(list);
-            list.show();
-            readerWriter.writeHumans(fileNameOut, list);
+            LinkedList<Integer> list = new LinkedList<Integer>();
+            list.add(1);
+            LinkedList<Human> list2 = readerWriter.readHumans(fileNameInput);
+            LinkedList<Integer> test = new LinkedList<Integer>();
+            test.add(1);
+            System.out.print(list.equals(test));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
