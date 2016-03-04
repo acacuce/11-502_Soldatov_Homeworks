@@ -60,31 +60,34 @@ public class HumanSort {
             Iterator<Human> iterator = listOfHuman.iterator();
             while (iterator.hasNext()) {
                 Human currentHuman = iterator.next();
-                if (currentHuman.getName().length() <= i) {
-                    LinkedList<Human> listWithNullChar = arrayList.get(0);
-                    if (listWithNullChar != null) {
-                        listWithNullChar.add(currentHuman);
-                    } else {
-                        listWithNullChar = new LinkedList<Human>();
-                        listWithNullChar.add(currentHuman);
-                        arrayList.set(listWithNullChar, 0);
-                    }
-                } else {
-                    Character charAtIndex = currentHuman.getName().charAt(i);
-                    LinkedList<Human> listAtIndex = arrayList.get(charAtIndex.hashCode());
-                    if (listAtIndex != null) {
-                        listAtIndex.add(currentHuman);
-                    } else {
-                        listAtIndex = new LinkedList<Human>();
-                        listAtIndex.add(currentHuman);
-                        arrayList.set(listAtIndex, charAtIndex.hashCode());
-                    }
-                }
-
+                addHumanToBucket(currentHuman, i);
             }
             listOfHuman = buildList();
         }
         return listOfHuman;
+    }
+
+    private void addHumanToBucket (Human currentHuman, int iteration) {
+        if (currentHuman.getName().length() <= iteration) {
+            LinkedList<Human> listWithNullChar = arrayList.get(0);
+            if (listWithNullChar != null) {
+                listWithNullChar.add(currentHuman);
+            } else {
+                listWithNullChar = new LinkedList<Human>();
+                listWithNullChar.add(currentHuman);
+                arrayList.set(listWithNullChar, 0);
+            }
+        } else {
+            Character charAtIndex = currentHuman.getName().charAt(iteration);
+            LinkedList<Human> listAtIndex = arrayList.get(charAtIndex.hashCode());
+            if (listAtIndex != null) {
+                listAtIndex.add(currentHuman);
+            } else {
+                listAtIndex = new LinkedList<Human>();
+                listAtIndex.add(currentHuman);
+                arrayList.set(listAtIndex, charAtIndex.hashCode());
+            }
+        }
     }
 
     private int findMaxLenght (LinkedList<Human> list) {
