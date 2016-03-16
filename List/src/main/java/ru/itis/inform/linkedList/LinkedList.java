@@ -1,5 +1,7 @@
 package ru.itis.inform.linkedList;
 
+import ru.itis.inform.arrayList.ArrayList;
+
 public class LinkedList<T> implements List<T> {
     private Node<T> head;
     private Node<T> tail;
@@ -31,7 +33,7 @@ public class LinkedList<T> implements List<T> {
                 T value = current.getValue();
                 current = current.getPrevious();
                 return value;
-            } else throw new NullPointerException();
+            } else return null;
         }
 
         public void insert(T element) {
@@ -48,7 +50,7 @@ public class LinkedList<T> implements List<T> {
         }
 
         public T peekNext() {
-            return current.getNext().getValue();
+            return current.getValue();
         }
 
         public T peekPrevious() {
@@ -66,6 +68,7 @@ public class LinkedList<T> implements List<T> {
         if (head == null) {
             this.head = newNode;
             this.tail = head;
+            this.head.setPrevious(null);
         } else {
             tail.setNext(newNode);
             newNode.setPrevious(tail);
@@ -87,7 +90,7 @@ public class LinkedList<T> implements List<T> {
         }
     }
 
-    public void merge (LinkedList<T> list) {
+    public void append(LinkedList<T> list) {
         if (this.head != null){
             this.tail.setNext(list.getHead());
             this.tail = list.getTail();
@@ -98,6 +101,71 @@ public class LinkedList<T> implements List<T> {
             this.count = list.getCount();
         }
     }
+
+    public static <T extends Comparable<T>> LinkedList<T> merge (LinkedList<T> first, LinkedList<T> second){
+        Iterator<T> firstIterator = first.iterator();
+        Iterator<T> secondIterator = second.iterator();
+        LinkedList<T> newList = new LinkedList();
+        while (firstIterator.hasNext() && secondIterator.hasNext()) {
+            T o1 = firstIterator.peekNext();
+            T o2 = secondIterator.peekNext();
+            int compare = o1.compareTo(o2);
+            if (compare < 0) {
+                newList.add(o1);
+               o1 = firstIterator.next();
+            }else
+                if (compare > 0){
+                    newList.add(o2);
+                    o2 = secondIterator.next();
+                }else {
+                    newList.add(o1);
+                    newList.add(o2);
+                    o1 = firstIterator.next();
+                    o2 = secondIterator.next();
+                }
+        }
+        if (firstIterator != null) {
+            while (firstIterator.hasNext()) {
+                newList.add(firstIterator.next());
+            }
+        }
+        if (secondIterator != null){
+            while (secondIterator.hasNext()) {
+                newList.add(secondIterator.next());
+            }
+        }
+        return newList;
+    }
+
+    public static <T extends Comparable<T>> LinkedList<T> mergeSort(LinkedList<T> list) {
+        ArrayList<LinkedList<T>> stack = new ArrayList<LinkedList<T>>(20);
+        Iterator<T> iterator = list.iterator();
+        int stackPosition = 0;
+        while (iterator.hasNext()) {
+            LinkedList<T> tempList = new LinkedList<T>();
+            tempList.add(iterator.peekNext());
+            stack.set(tempList, stackPosition);
+            iterator.next();
+            stackPosition++;
+            while (stackPosition > 1 && (stack.get(stackPosition - 1).count) == (stack.get(stackPosition - 2).count)) {
+                LinkedList<T> firstList = stack.get(stackPosition - 1);
+                LinkedList<T> secondList = stack.get(stackPosition - 2);
+                stack.set(merge(firstList, secondList),stackPosition - 2);
+                stackPosition--;
+            }
+        }
+
+        while (stackPosition > 1) {
+            LinkedList<T> firstList = stack.get(stackPosition - 1);
+            LinkedList<T> secondList = stack.get(stackPosition - 2);
+            stack.set(merge(firstList, secondList),stackPosition - 2);
+            stackPosition--;
+        }
+        return  stack.get(0);
+    }
+
+
+
 
 //    @Override
 //    public boolean equals (Object another) {

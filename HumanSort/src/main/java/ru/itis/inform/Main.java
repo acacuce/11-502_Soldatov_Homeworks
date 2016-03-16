@@ -18,9 +18,8 @@ public class Main {
             LinkedList<Integer> list = new LinkedList<Integer>();
             list.add(1);
             LinkedList<Human> list2 = readerWriter.readHumans(fileNameInput);
-            LinkedList<Integer> test = new LinkedList<Integer>();
-            test.add(1);
-            System.out.print(list.equals(test));
+            list2 = sort.sortByAge(list2);
+            readerWriter.writeHumans(fileNameOut, list2);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
