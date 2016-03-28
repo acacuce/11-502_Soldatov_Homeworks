@@ -56,7 +56,7 @@ public class LinkedList<T> implements List<T> {
         public T peekPrevious() {
             if (current.getPrevious() != null) {
                 return current.getPrevious().getValue();
-            } else return null;
+            } else throw new NullPointerException();
         }
     }
 
@@ -164,32 +164,7 @@ public class LinkedList<T> implements List<T> {
         return  stack.get(0);
     }
 
-
-
-
-//    @Override
-//    public boolean equals (Object another) {
-//        System.out.print("equals?");
-//        if (another == null) return false;
-//        if (another == this) return true;
-//        if (!(another instanceof LinkedList)) return false;
-//
-//        LinkedList anotherList = (LinkedList) another;
-//
-//        if (this.count != anotherList.getCount()) return false;
-//
-//        Node thisNode = head;
-//        Node anotherNode = (Node) anotherList.getHead();
-//
-//        while(anotherNode != null) {
-//            if (!(thisNode.equals(anotherNode))) return false;
-//            thisNode = thisNode.getNext();
-//            anotherNode = anotherNode.getNext();
-//        }
-//        return true;
-//    }
-
-//    @Override
+    @Override
     public boolean equals(Object o) {
         if (o == this)
             return true;
